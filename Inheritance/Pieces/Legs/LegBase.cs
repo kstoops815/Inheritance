@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inheritance.Pieces.Legs
 {
@@ -12,9 +8,11 @@ namespace Inheritance.Pieces.Legs
         public string Color { get; set; }
         public LegSize Size { get; set; }
 
+        public abstract void Jump(int howHigh);
+
         public virtual void Walk(int numberOfSteps)
         {
-            Console.WriteLine($"The {Size} legs took {numberOfSteps} steps.");
+            Console.WriteLine($"The {Size} legs wearing a {GetType().Name} took {numberOfSteps} steps");
         }
     }
 }

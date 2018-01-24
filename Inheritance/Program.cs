@@ -1,9 +1,6 @@
-﻿using Inheritance.Pieces.Legs;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Inheritance.Pieces.Legs;
 
 namespace Inheritance
 {
@@ -18,8 +15,6 @@ namespace Inheritance
                 Size = LegSize.Baby,
                 NumberOfPockets = 6
             };
-
-            
 
             var jeans1 = new Jeans
             {
@@ -47,9 +42,10 @@ namespace Inheritance
                 Color = "Rainbow",
                 Size = LegSize.Child,
                 NumberOfPockets = 0,
-                Material = "Stretchy",
+                Material = "Strechy",
                 Length = Length.Church
             };
+
 
             var skirt1 = new Skirt
             {
@@ -60,7 +56,7 @@ namespace Inheritance
                 Length = Length.StreetCorner
             };
 
-            var legs = new List<LegBase>
+            var movers = new List<IMoveable>
             {
                 shorts,
                 skirt,
@@ -70,17 +66,32 @@ namespace Inheritance
                 skirt1
             };
 
-            foreach (var leg in legs)
+            foreach (var mover in movers)
             {
-                leg.Walk(10);
+                mover.Walk(10);
+                mover.Jump(10);
+                mover.Run(15);
 
-                if (leg is Skirt s)
+                switch (mover)
                 {
-                    s.Material = "jeans";
+                    case Skirt s:
+                        Console.WriteLine($"Its a skirt made of {s.Material}");
+                        break;
+                    case Jeans j:
+                        Console.WriteLine($"its {j.Color} jeans");
+                        j.HowFarIMoved = 2000;
+                        break;
+                    case IMoveable m:
+                        m.Run(10);
+                        break;
                 }
+                Console.WriteLine($"The {mover.GetType().Name} moved {mover.HowFarIMoved} units.");
             }
 
             Console.ReadLine();
+
+
+            var myDictionary = new Dictionary<string, string>();
         }
     }
 }
